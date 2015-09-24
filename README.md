@@ -13,6 +13,7 @@ The challenge is interlinking the ecommerce software we are using, Bigcommerce, 
 Any and all help is more than appreciated.
 
 SCRIPTS INCLUDE:
+    
     rqtest.py  -- proof of successful connection test, returns time from store
     
     grabsku.py -- This is the script I'm activily working on to work with my particular setup of: 
