@@ -15,7 +15,14 @@ Any and all help is more than appreciated.
 SCRIPTS INCLUDE:
     rqtest.py  -- proof of successful connection test, returns time from store
     
-    grabsku.py -- This is the script I'm activily working on to work with my particular setup of pulling all the skus and qty levels for a store, importing an excel file of the same formatted info from a POS databse, update the store inventory levels to the POS inventory values, remove whatever was sold in the store since last run. Create a log file for review.
+    grabsku.py -- This is the script I'm activily working on to work with my particular setup of: 
+                pulling all the skus and qty levels for a store, 
+                importing an excel file of the same formatted info from a POS databse, 
+                update the store inventory levels to the POS inventory values, 
+                remove whatever was sold in the store since last run. 
+                Create a log file for review.
     
-    skutofile.py -- A side script that I figure someone might find useful.  Pulls all skus and inventory levels from the store and prints it to a csv file with two columns sku and cooresponding inventory level. 
+    skutofile.py -- A side script that I figure someone might find useful.  
+                    Pulls all skus and inventory levels from the store
+                    prints it to a csv file with two columns sku and cooresponding inventory level. 
       
