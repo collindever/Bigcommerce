@@ -22,6 +22,14 @@ SCRIPTS INCLUDE:
                 update the store inventory levels to the POS inventory values, 
                 remove whatever was sold in the store since last run. 
                 Create a log file for review.
+                
+        grabsku.py -- This pulls all of the product skus and quantities from bigcommerce.  It first goes through all                  products with option sets and pulls all of their sku's and then goes and pulls all the skus for the                   single item products.  Saves these to a dicitonary with the sku as key and qty as value.
+        
+        yet to be developed script that will update inventory to what is pulled from exported excel file
+        
+        bcorders.py  --  pulls all of the skus from all order since last time being run.  subtracts the approrpriate                  quantity from inventory.
+        
+Non-Essential Scripts
     
     skutofile.py -- A side script that I figure someone might find useful.  
                     Pulls all skus and inventory levels from the store
