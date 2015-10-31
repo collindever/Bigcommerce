@@ -14,7 +14,7 @@ Any and all help is more than appreciated.
 
 SCRIPTS INCLUDE:
     
-    rqtest.py  -- proof of successful connection test, returns time from store
+    rqtest.py  -- proof of successful connection test, returns time from store in UNIX time
     
     InvnUpdate.py -- This is the script I'm activily working on to work with my particular setup of: 
                 pulling all the skus and qty levels for a store, 
@@ -27,13 +27,10 @@ SCRIPTS INCLUDE:
         
         yet to be developed script that will update inventory to what is pulled from exported excel file
         
-        bcorders.py  --  pulls all of the skus from all order since last time being run.  subtracts the approrpriate                  quantity from inventory.
+        bcorders.py  --  pulls all of the skus from all orders since last time being run, and subtracts the                               approrpriate quantity from inventory.
         
 Non-Essential Scripts
     
     skutofile.py -- A side script that I figure someone might find useful.  
                     Pulls all skus and inventory levels from the store
                     prints it to a csv file with two columns sku and cooresponding inventory level. 
-    
-    productnotsku.py -- I became aware that the above file only pulled items with skus in the option set not single                       sku'd products so I created a 2nd loop with pulls all of those skus.  InvnUpdate currently is made                     up of these two loops.
-      
