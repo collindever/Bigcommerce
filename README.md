@@ -23,11 +23,15 @@ SCRIPTS INCLUDE:
                 remove whatever was sold in the store since last run. 
                 Create a log file for review.
                 
-        grabsku.py -- This pulls all of the product skus and quantities from bigcommerce.  It first goes through all products with option sets and pulls all of their sku's and then goes and pulls all the skus for the single item products.  Saves these to a dicitonary with the sku as key and qty as value.
+        grabsku.py -- This pulls all of the product skus and quantities from bigcommerce.  
+                It first goes through all products with option sets and pulls all of their sku's
+                then it goes and pulls all the skus for the single item products  
+                Finally Saves these to a dicitonary with the sku as key and qty as value.
         
         yet to be developed script that will update inventory to what is pulled from exported excel file
         
-        bcorders.py  --  pulls all of the skus from all orders since last time being run, and subtracts the approrpriate quantity from inventory.
+        bcorders.py  --  pulls all of the skus from all orders since last time being run 
+                then list them in a dictionary to be removed from main inventory
         
 Non-Essential Scripts
     
