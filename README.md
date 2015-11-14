@@ -16,12 +16,16 @@ SCRIPTS INCLUDE:
     
     rqtest.py  -- proof of successful connection test, returns time from store in UNIX time
     
-    InvnUpdate.py -- This is the script I'm activily working on to work with my particular setup of: 
-                    pulling all the skus and qty levels for a store, 
-                    importing an excel file of the same formatted info from a POS databse, 
+    InvnUpdate.py -- This is the script  that ties everything together: 
+                    pulls the skus and qty levels from bigcommerce store from grabsku.py, 
+                    imports an excel file of the same info as above from a POS databse with sprdshtimprt.py, 
                     update the store inventory levels to the POS inventory values, 
-                    remove whatever was sold in the store since last run. 
-                    Create a log file for review.
+                    remove whatever was sold in the store since last run with bcorders.py. 
+                    Create a log file for review.*
+                    Current version prints three cvs files: 
+                        the updated inventory
+                        things deleted from POS (only on Bigcommerce)
+                        things added to POS (only on spreadsheet)
                 
         grabsku.py -- This pulls all of the product skus and quantities from bigcommerce.  
                     It first goes through all products with option sets and pulls all of their sku's
