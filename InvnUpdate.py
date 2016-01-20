@@ -8,25 +8,30 @@ from sprdshtimprt import rpinvn
 old_product = {}
 new_product = {}
 update_invn = {}
-rpinvnSet = set(rpinvn)
-bcinvnSet = set(bcinvn)
-d = datetime()
+
+rpinvnSet = set(rpinvn.keys())
+bcinvnSet = set(bcinvn.keys())
+
+
+
+d = datetime.date.today()
 
 for sku in rpinvnSet.intersection(bcinvnSet):
 	update_invn[sku] = rpinvn[sku]
 	if sku in order_inventory:
 		update_invn[sku] = update_invn[sku] - order_inventory[sku]
 
+
 for sku in bcinvnSet.difference(rpinvnSet):
 	old_product[sku] = bcinvn[sku]
 
 for sku in rpinvnSet.difference(bcinvnSet):
 	new_product[sku] = rpinvn[sku]
-
-
 	
-with open('%d-%d-%d.csv' % (d.year, d.month, d.day), 'w+') as f:
+with open('%s.csv' % (d), 'w+') as f:
 	w = csv.writer(f)
+	headers = ['Product SKU', 'Stock Level']
+	w.writerow(headers)
 	for row in update_invn.iteritems():	
 		w.writerow(row)
 f.close()
