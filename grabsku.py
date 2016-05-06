@@ -3,50 +3,40 @@ import elementtree.ElementTree as ET
 import xml.parsers.expat
 import csv
 
-cnt =  1
+cnt = 1
 payload = {'limit': '200', 'page' : cnt}
-inventory = {}
+bcinvn = {}
 
-while cnt != -1:
-	try:
-		r = requests.get('https://STORE URL/api/v2/products/skus', params=payload, auth=('USER ID', 'API KEY'))
+def obtainProduct(url, payload, topLevel, bcinvn):
+	cnt = 1
+	while cnt != -1:
+		try:
+			r = requests.get('https://STORE URL/api/v2/%s' %url, params=payload, auth=('API ID', 'API PASSWORD'))
+			tree = ET.fromstring(r.content)
+		except xml.parsers.expat.ExpatError, e:
+			cnt = -1
 
-		tree = ET.fromstring(r.content)   
+		else:
+			for product in tree.findall('%s' %topLevel):
+				if product.find('sku').text is not None:
+					itmsku = int(product.find('sku').text)
+					qty = int(product.find('inventory_level').text)
+					bcinvn[itmsku] = qty
 
-	except xml.parsers.expat.ExpatError, e:
-		cnt = -1
+			cnt = cnt + 1
+			payload = {'limit': '200', 'page' : cnt}
 
-	else:
-		for sku in tree.findall('sku'):
-			itmsku = sku.find('sku').text
-			qty = sku.find('inventory_level').text
-			inventory[itmsku] = qty
+	return bcinvn
 
-		cnt = cnt + 1
-		payload = {'limit': '200', 'page' : cnt}
+print "Grabbing SKU's From Option Set Products"
 
-	finally:
-		print len(inventory)
+bcinvn = obtainProduct('products/skus', payload, 'sku', bcinvn)
 
-cnt =  1
-payload = {'limit': '200', 'page' : cnt}
+print "Grabbing SKU's From Option Set Products COMPLETED"
 
-while cnt != -1:
-	try:
-		r = requests.get('https://STORE URL/api/v2/products', params=payload, auth=('USER ID', 'API KEY'))
+print "Grabbing SKU's From Single SKU Products"
 
-		tree = ET.fromstring(r.content)   
+bcinvn = obtainProduct('products', payload, 'product', bcinvn)
 
-	except xml.parsers.expat.ExpatError, e:
-		cnt = -1
-
-	else:
-		for product in tree.findall('product'):
-			itmsku = product.find('sku').text
-			qty = product.find('inventory_level').text
-			inventory[itmsku] = qty
-
-		cnt = cnt + 1
-		payload = {'limit': '200', 'page' : cnt}
-	
-print len(inventory)
+print "Grabbing SKU's From Single SKU Products COMPLETED"
+print len(bcinvn)
