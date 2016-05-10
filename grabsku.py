@@ -3,12 +3,13 @@ import elementtree.ElementTree as ET
 import xml.parsers.expat
 import csv
 
-cnt = 1
-payload = {'limit': '200', 'page' : cnt}
 bcinvn = {}
 
-def obtainProduct(url, payload, topLevel, bcinvn):
+def obtainProduct(url, topLevel):
 	cnt = 1
+	payload = {'limit': '200', 'page' : cnt}
+	invn = {}
+	
 	while cnt != -1:
 		try:
 			r = requests.get('https://STORE URL/api/v2/%s' %url, params=payload, auth=('API ID', 'API PASSWORD'))
@@ -21,22 +22,22 @@ def obtainProduct(url, payload, topLevel, bcinvn):
 				if product.find('sku').text is not None:
 					itmsku = int(product.find('sku').text)
 					qty = int(product.find('inventory_level').text)
-					bcinvn[itmsku] = qty
+					invn[itmsku] = qty
 
 			cnt = cnt + 1
 			payload = {'limit': '200', 'page' : cnt}
 
-	return bcinvn
+	return invn
 
 print "Grabbing SKU's From Option Set Products"
 
-bcinvn = obtainProduct('products/skus', payload, 'sku', bcinvn)
+bcinvn.update(obtainProduct('products/skus', 'sku'))
 
 print "Grabbing SKU's From Option Set Products COMPLETED"
 
 print "Grabbing SKU's From Single SKU Products"
 
-bcinvn = obtainProduct('products', payload, 'product', bcinvn)
+bcinvn.update(obtainProduct('products', 'product'))
 
 print "Grabbing SKU's From Single SKU Products COMPLETED"
 print len(bcinvn)
